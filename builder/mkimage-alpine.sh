@@ -52,9 +52,6 @@ build() {
 			sed -ie 's/^root::/root:!:/' "$rootfs/etc/shadow"
 	} >&2
 
-	# [[ "$ADD_APK_SCRIPT" ]] && cp /apk-install "$rootfs/usr/sbin/apk-install"
-
-	# save
 	tar -J -f rootfs.tar.xz --numeric-owner -C "$rootfs" -c .
 	[[ "$STDOUT" ]] && cat rootfs.tar.xz
 
