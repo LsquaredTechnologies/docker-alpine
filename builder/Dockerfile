@@ -1,0 +1,5 @@
+FROM alpine:latest
+RUN apk add --update --no-cache bash tzdata xz
+ADD mkimage-alpine.sh /
+ENTRYPOINT ["/mkimage-alpine.sh"]
+# CMD ["/bin/sh"]

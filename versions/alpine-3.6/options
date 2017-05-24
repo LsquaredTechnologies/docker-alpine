@@ -1,0 +1,5 @@
+export RELEASE="v3.6"
+export MIRROR="http://dl-cdn.alpinelinux.org/alpine"
+export PACKAGES="alpine-baselayout,alpine-keys,apk-tools,ca-certificates,libc-utils"
+export BUILD_OPTIONS=(-b -d -s -m $MIRROR -p $PACKAGES -r $RELEASE -t UTC)
+export TAGS=(lsquared/alpine:3.6 lsquared/alpine:edge)
