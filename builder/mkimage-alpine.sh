@@ -6,6 +6,7 @@
 # Luis Lavena (luislavena).
 
 # Copied from https://github.com/gliderlabs/docker-alpine/tree/master/builder/scripts
+# Updated to add docker-entrypoint.d startup scripts 
 
 declare REL="${REL:-edge}"
 declare MIRROR="${MIRROR:-http://nl.alpinelinux.org/alpine}"
@@ -17,7 +18,7 @@ set -eo pipefail; [[ "$TRACE" ]] && set -x
 }
 
 usage() {
-	printf >&2 '%s: [-r release] [-m mirror] [-s] [-E] [-e] [-d] [-t timezone] [-p packages] [-b]\n' "$0" && exit 1
+	printf >&2 '%s: [-r release] [-m mirror] [-s] [-E] [-e] [-d] [-t timezone] [-p packages] [-b] [-f]\n' "$0" && exit 1
 }
 
 build() {
@@ -50,6 +51,9 @@ build() {
 			cp "/usr/share/zoneinfo/$TIMEZONE" "$rootfs/etc/localtime"
 		[[ "$DISABLE_ROOT_PASSWD" ]] && \
 			sed -ie 's/^root::/root:!:/' "$rootfs/etc/shadow"
+		[[ "$ADD_ROOTFS" ]] && \
+			cp -fR /var/tmp/rootfs/* "$rootfs"
+			
 	} >&2
 
 	tar -J -f rootfs.tar.xz --numeric-owner -C "$rootfs" -c .
@@ -59,17 +63,18 @@ build() {
 }
 
 main() {
-	while getopts "hr:m:t:sEecdp:b" opt; do
+	while getopts "bcdEefhm:p:r:st:" opt; do
 		case $opt in
-			r) REL="$OPTARG";;
-			m) MIRROR="${OPTARG%/}";;
-			s) STDOUT=1;;
-			E) OMIT_COMMUNITY=1;;
-			e) REPO_EXTRA=1;;
-			t) TIMEZONE="$OPTARG";;
-			p) PACKAGES="$OPTARG";;
 			b) ADD_BASELAYOUT=1;;
 			d) DISABLE_ROOT_PASSWD=1;;
+			E) OMIT_COMMUNITY=1;;
+			e) REPO_EXTRA=1;;
+			f) ADD_ROOTFS=1;;
+			m) MIRROR="${OPTARG%/}";;
+			p) PACKAGES="$OPTARG";;
+			r) REL="$OPTARG";;
+			s) STDOUT=1;;
+			t) TIMEZONE="$OPTARG";;
 			*) usage;;
 		esac
 	done

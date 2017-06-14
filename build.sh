@@ -10,6 +10,7 @@ build() {
 	}
 
 	for file in $build_files; do
+		echo
 		# shellcheck source=versions/alpine-3.2/options
 		source "$file"
 		local version_dir
@@ -24,6 +25,9 @@ build() {
 			docker build -t "$tag" "$version_dir"
 		done
 	done
+
+	# Clean up
+	docker rmi "$BUILDER_IMAGE"
 }
 
 main() {
