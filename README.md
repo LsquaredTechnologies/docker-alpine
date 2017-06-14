@@ -1,15 +1,28 @@
 # Introduction 
 This is the customized Alpine Linux Docker image.
 
-#Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+# Usage
+```Dockerfile
+FROM lsquared/alpine:3.5
+RUN apk add --no-cache mysql-client
+```
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Build
+Run build.sh from the master branch.
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+
+1. Add another version/tag
+If you want to add a new version or tag, simply duplicate a folder in the `versions` folder.
+Change the `Dockerfile` and `options` files to your needs and re-build.
+
+1. Modify tags
+In `options` files, it's possible to change the tags for the generated images.
+E.g.
+- in `alpine-3.4`, we use a single tag: `lsquared/alpine:3.4`
+- in `alpine-3.5`, we use two tags: `lsquared/alpine:3.5` and `lsquared/alpine:latest`
+- in `alpine-3.6`, we use two tags: `lsquared/alpine:3.6` and `lsquared/alpine:edge`
+You can add as many tags as you want.
+
+1. Modify image contents
+TODO modify the `mkimage-alpine.sh` file
