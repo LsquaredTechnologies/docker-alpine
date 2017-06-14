@@ -1,4 +1,4 @@
-FROM lsquared/scratch
+FROM scratch
 ARG RELEASE=${RELEASE:-}
 ADD rootfs.tar.xz /
 CMD ["/bin/sh"]
