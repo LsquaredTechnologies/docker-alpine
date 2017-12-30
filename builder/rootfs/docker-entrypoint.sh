@@ -51,7 +51,8 @@ case "$1" in
         exec /bin/sh "$@"
     ;;
     "start")
-        docker-entrypoint-init.sh
+        shift
+        . /docker-entrypoint-init.sh
         echo
         echo 'Container init process complete; ready for start up.'
         echo
