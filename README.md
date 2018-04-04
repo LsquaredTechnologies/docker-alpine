@@ -25,9 +25,11 @@ Change the `Dockerfile` and `options` files to your needs and re-build.
 In `options` files, it's possible to change the tags for the generated images.
 E.g.
 
-- in `alpine-3.4`, we use a single tag: `lsquared/alpine:3.4`
-- in `alpine-3.5`, we use two tags: `lsquared/alpine:3.5` and `lsquared/alpine:latest`
-- in `alpine-3.6`, we use two tags: `lsquared/alpine:3.6` and `lsquared/alpine:edge`
+- in `alpine-3.4`, we use this tag: `lsquared/alpine:3.4`
+- in `alpine-3.5`, we use this tag: `lsquared/alpine:3.5`
+- in `alpine-3.6`, we use this tag: `lsquared/alpine:3.6`
+- in `alpine-3.7`, we use this tags: `lsquared/alpine:3.7` and `lsquared/alpine:latest`
+- in `alpine-3.8`, we use this tags: `lsquared/alpine:3.8` and `lsquared/alpine:edge`
 
 You can add as many tags as you want.
 
