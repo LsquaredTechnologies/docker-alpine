@@ -1,6 +1,6 @@
 ## Introduction 
 
-This is the customized Alpine Linux Docker image.
+This is a customized Alpine Linux Docker image.
 
 # Usage
 
